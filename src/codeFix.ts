@@ -1,6 +1,6 @@
 import { CodeAction, CodeActionContext, Diagnostic, Range, TextDocument } from 'vscode'
 
-export interface QuickFix {
+export interface CodeFix {
     codes: (number | string)[]
     provide: (context: {
         diagnostic: Diagnostic

@@ -1,7 +1,7 @@
 import { Range, WorkspaceEdit } from 'vscode'
-import { QuickFix } from './quickFix'
+import { CodeFix } from './codeFix'
 
-export const allQuickFixes: QuickFix[] = [
+export const allCodeFixes: CodeFix[] = [
     {
         codes: [1015],
         provide({ document, diagnosticRange }) {

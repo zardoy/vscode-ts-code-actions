@@ -1,6 +1,6 @@
 import { CodeAction, CodeActionKind, languages } from 'vscode'
 import { defaultJsSupersetLangsWithVue } from '@zardoy/vscode-utils/build/langs'
-import { allQuickFixes } from './fixes'
+import { allCodeFixes } from './fixes'
 
 export const activate = () => {
     const applyPrefferableOnSave = true
@@ -13,7 +13,7 @@ export const activate = () => {
             if (!diagnostics.length) return
 
             const codeActions: CodeAction[] = []
-            for (let { codes, messageRegex, provide } of allQuickFixes) {
+            for (let { codes, messageRegex, provide } of allCodeFixes) {
                 const diagnosticsToApply = diagnostics
                     .map(diagnostic => {
                         const { code, message } = diagnostic
