@@ -1,0 +1,7 @@
+{
+    "extends": "@zardoy/tsconfig/tsconfig",
+    "compilerOptions": {},
+    "include": [
+        "src"
+    ]
+}
