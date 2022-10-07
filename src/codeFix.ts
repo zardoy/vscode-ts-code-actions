@@ -1,4 +1,14 @@
-import { CodeAction, CodeActionContext, Diagnostic, Range, TextDocument } from 'vscode'
+import { CodeAction, CodeActionContext, Diagnostic, Range, TextDocument, TextEdit } from 'vscode'
+
+type CustomReturnFormat =
+    | {
+          title: string
+          textEdits: TextEdit[]
+          fixAll?: boolean
+      }
+    | {
+          codeAction: CodeAction
+      }
 
 export interface CodeFix {
     codes: (number | string)[]
@@ -8,6 +18,6 @@ export interface CodeFix {
         context: CodeActionContext
         match: RegExpExecArray
         document: TextDocument
-    }) => CodeAction | undefined
+    }) => CustomReturnFormat | undefined
     messageRegex?: RegExp
 }
