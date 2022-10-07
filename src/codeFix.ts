@@ -10,10 +10,17 @@ type CustomReturnFormat =
           codeAction: CodeAction
       }
 
+export interface CustomCodeAction {
+    title: string | undefined
+    /** undefined - doesn't care, otherwise filter */
+    exactPos?: boolean
+    provide(context: { document: TextDocument; range: Range }): { textEdits: TextEdit[] } | { codeAction: CodeAction }
+}
+
 export interface CodeFixBase {
     codes: (number | string)[]
     fixAll?: boolean
-    title?: string
+    title: string | undefined
     provide: (context: {
         diagnostic: Diagnostic
         diagnosticRange: Range
