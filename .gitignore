@@ -8,6 +8,7 @@ out
 .next
 .nuxt
 .cache
+scripts/diagnosticMessages.json
 
 coverage
 *.lcov
