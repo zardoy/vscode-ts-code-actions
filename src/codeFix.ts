@@ -1,4 +1,6 @@
-import { CodeAction, CodeActionContext, Diagnostic, Range, TextDocument, TextEdit } from 'vscode'
+import { CodeAction, CodeActionContext, Diagnostic, Position, Range, TextDocument, TextEdit } from 'vscode'
+
+type MaybePromise<T> = T | Promise<T>
 
 type CustomReturnFormat =
     | {
@@ -10,12 +12,18 @@ type CustomReturnFormat =
           codeAction: CodeAction
       }
 
-export interface CustomCodeAction {
+interface CustomCodeActionProvide<P extends boolean = false> {
+    exactPos: boolean
+    provide(context: { document: TextDocument; range: Range }): undefined | boolean | { data? }
+    execute(
+        context: { document: TextDocument; data?: any } & (P extends true ? { pos: Position } : { range: Range }),
+    ): MaybePromise<void /* { textEdits: TextEdit[] } | { codeAction: CodeAction } */>
+}
+
+export type CustomCodeAction = {
     title: string | undefined
     /** undefined - doesn't care, otherwise filter */
-    exactPos?: boolean
-    provide(context: { document: TextDocument; range: Range }): { textEdits: TextEdit[] } | { codeAction: CodeAction }
-}
+} & CustomCodeActionProvide
 
 export interface CodeFixBase {
     codes: (number | string)[]
