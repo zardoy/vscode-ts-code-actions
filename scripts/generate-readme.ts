@@ -29,7 +29,7 @@ insertLines += `\n|${headers.map(() => '---').join('|')}|`
 for (const codeFix of (await import('../src/fixes')).allCodeFixes) {
     let icons = ''
     if (codeFix.fixAll) icons += '🔧'
-    const data = [icons, codeFix.codes.map(code => findDiagnosticByCode(code as number) ?? code).join(', '), codeFix.title]
+    const data = [icons, codeFix.codes.map(code => findDiagnosticByCode(code as number) ?? code).join('<br />'), codeFix.title]
     insertLines += `\n|${data.join('|')}|`
 }
 
